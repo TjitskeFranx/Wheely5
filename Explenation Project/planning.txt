@@ -1,43 +1,56 @@
-Planning:
-
+PLANNING
+___________________________________________________
+___________________________________________________
 Week 1
 Fri {
   -Beacon ---> Arduino (wheelchair recognition)
   -Main visualisation score + freeze
 }
-
+___________________________________________________
 Week 2
 Mon{
   -Arduino - Rasberry Pi through cable connection
   -Arduino 2 hardware done (and connected to Rasberry)
   -Timer / Reset / Play
 }
+---------------------------------------------------
 Fri {
   -Arduino --> Lora --> DCD
   -Connect RP data to interface
 }
-
+___________________________________________________
 Week 3
 Mon{
   -catch up time
 }
+---------------------------------------------------
 Fri{
   -DCD to web application
   -start 3D tile Design
   -Interface back to Arduino 2 commands
 }
-
+___________________________________________________
 Week 4
 Mon{
   -Tile prototyping
   -Exhibition design setup (playground/poster)
 }
+---------------------------------------------------
 Fri{
   -catch up time
   -clean up Github
 }
-
+___________________________________________________
 Week 5
 Mon{
  Exhibition day!
 }
+___________________________________________________
+
+
+
+---------------------------------------------------
+Backup Plans
+---------------------------------------------------
+- change prototype board to interface
+- 
