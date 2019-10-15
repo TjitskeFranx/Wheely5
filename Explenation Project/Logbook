@@ -1,0 +1,68 @@
+Logbook
+___________________________________________________
+___________________________________________________
+Week 1 [16-20 Sep]
+Activities:
+-Setting up. Trying to set the RP and connect it. Only partially successful.
+-Ideating on a concept for a connected wheelchair
+
+Main Problems:
+-couldn't successfully install Python on 1 PC
+-couldn't successfully setup RP or link to DCD (as DCD was out of service)
+
+Progress:
+build the foundation for the project's concept
+
+___________________________________________________
+Week 2 [23-27 Sep]
+Activities:
+-Working on Arduino to turn a Tile [button] for one team [red led] or another team [blue led]
+-Continuing to setup Raspberry Pi [RP] with help of tech support
+-developing project concept further and thinking of its architecture and sensors
+
+Progress:
+-setting up foundation of hardware I/O of the project
+-Successfully setting up RP in the project
+-Making concept Vision [vision.jpg], first iteration of project io architecture and list of sensors actuators
+
+___________________________________________________
+Week 3 [30-4 Sep/Oct]
+Activities:
+-Following tutorials of html/css/java/python. Being able to link it all in a basic way
+-Write a 'simulation code' that simulates a 'score' in the game (random division between Red, Blue, and Neutral Tiles)
+-
+-
+
+Progress:
+-Setting up the beginning of the web-application
+
+
+___________________________________________________
+Week 4 [7-11 Oct]
+Activities:
+-Plan and discuss course next weeks
+-figure out how to auto-update web application and create a time-element in js to make simulation code dynamic
+-make js simulation ''algorithm'' dependent on dynamic score (if Red has many Tiles, it will be harder to get more of them)
+-link this js to html and create a visual 'design' of the web application to show scores between 2 teams over time
+-
+-
+
+Main problems:
+
+Progress:
+-Create OK-looking web-application display of the game with Js Html and Css (only linked to simulation code)
+-Decide on a 'ideal yet feasible' IoT architecture for the project [architecture.jpg]
+-Decide on a planning for the project [planning.txt].
+
+___________________________________________________
+Week 5 [14 & 18 Oct]
+Activities:
+
+
+Main problems:
+
+
+Progress:
+
+
+___________________________________________________
