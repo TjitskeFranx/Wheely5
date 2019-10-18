@@ -31,7 +31,7 @@ print(my_property.to_json())
 # Let's create a function that generate random values
 def generate_dum_property_values(the_property):
     # Define a tuple with the current time, and 3 random values
-    values = (random(), random(), random())
+    values = (random(), 5, random())
     # Update the values of the property
     the_property.update_values(values)
 
@@ -40,4 +40,4 @@ def generate_dum_property_values(the_property):
 while True:
     generate_dum_property_values(my_property)
     # Have a 2-second break
-    time.sleep(2)
+    time.sleep(2) #in  seconds
