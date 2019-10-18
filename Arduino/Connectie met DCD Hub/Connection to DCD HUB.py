@@ -35,7 +35,6 @@ ser = serial.Serial(
 # Read the next line from the serial port
 # and update the property values
 def serial_to_property_values():
-
     # Read one line
     line_bytes = ser.readline()
     # If the line is not empty
