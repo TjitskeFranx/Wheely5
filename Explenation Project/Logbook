@@ -30,12 +30,13 @@ Week 3 [30-4 Sep/Oct]
 Activities:
 -Following tutorials of html/css/java/python. Being able to link it all in a basic way
 -Write a 'simulation code' that simulates a 'score' in the game (random division between Red, Blue, and Neutral Tiles)
--
+-Connect a Smartphone to the bluetooth module to activate a light
 -
 
 Progress:
 -Setting up the beginning of the web-application
-
+- After two days of work, we manage to connect the smartphone to the bluetooth module. The Smartphone uses an application 'Bluecontrol'.
+With this app we were able to turn on and of a led light via a bluetooth connection.
 
 ___________________________________________________
 Week 4 [7-11 Oct]
@@ -44,8 +45,8 @@ Activities:
 -figure out how to auto-update web application and create a time-element in js to make simulation code dynamic
 -make js simulation ''algorithm'' dependent on dynamic score (if Red has many Tiles, it will be harder to get more of them)
 -link this js to html and create a visual 'design' of the web application to show scores between 2 teams over time
--
--
+-Setup a bluetooth hardware with connection to the Arduino
+-Make this bluetooth module a device which scans for other devices and detects the RSSI
 
 Main problems:
 
@@ -53,11 +54,14 @@ Progress:
 -Create OK-looking web-application display of the game with Js Html and Css (only linked to simulation code)
 -Decide on a 'ideal yet feasible' IoT architecture for the project [architecture.jpg]
 -Decide on a planning for the project [planning.txt].
+-The bluetooth module is connected to the arduino and can search for other devices via AT commends. Unfortunately, we could not program
+the AT commends in the void loop setting. 
+
 
 ___________________________________________________
 Week 5 [14 & 18 Oct]
 Activities:
-
+-Trying to work out the LoRaWAN connection
 
 Main problems:
 
