@@ -65,11 +65,15 @@ ___________________________________________________
 Week 5 [14 & 18 Oct]
 Activities:
 -Trying to work out the LoRaWAN connection
+-Connecting the Bluetooth module with the arduino code
+-Meeting with Jacky
 
 Main problems:
 
 
 Progress:
-
+-Managed to give AT commends to the Bluetooth module automatic presented in the serial monitor
+-Explore the  possibilities with the LoRa module. Not much progress meet next week with Martin Havenak
+-Module can't be found by the things Network  
 
 ___________________________________________________
