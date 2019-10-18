@@ -55,8 +55,11 @@ Progress:
 -Decide on a 'ideal yet feasible' IoT architecture for the project [architecture.jpg]
 -Decide on a planning for the project [planning.txt].
 -The bluetooth module is connected to the arduino and can search for other devices via AT commends. Unfortunately, we could not program
-the AT commends in the void loop setting. 
-
+the AT commends in the void loop setting.
+-The serial monitor showed the devices found by the bluetooth module. The next step was to integrate a treshold which determines the
+distance between the bluetooth device (transmitter) and the receiver. This was not successful since the AT+INQ: <Param1>,<Param2>,<Param3>,
+Param1: Bluetooth address, Param2: device type, Param3: RSSI signal
+Param3: was not showed in the serial monitor and we do not know why.
 
 ___________________________________________________
 Week 5 [14 & 18 Oct]
