@@ -1,0 +1,34 @@
+PLANNING
+___________________________________________________
+___________________________________________________
+Week 6 [21 & 25 Oct]
+Tue {
+  Hardware IO's to one (2 people)
+  Bluetooth continue with adding threshold
+}
+___________________________________________________
+Fri {
+  overshoot day
+  start linking Arduino to RB
+}
+___________________________________________________
+___________________________________________________
+
+Week 7 [28 & 1 Oct-Nov]
+Mon {
+  design Tile and model to send to printer (or making it)
+  Linking Arduino to RB 2
+}
+___________________________________________________
+Fri{
+  Linking RB (python) to webapp (CRITICAL)
+  Making Tile and exhibition setup
+}
+___________________________________________________
+
+???{ overshoot day
+  Fix errors that we have of course
+}
+___________________________________________________
+
+4 Nov: Exhibition
