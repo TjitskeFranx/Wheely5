@@ -20,16 +20,18 @@ import math
 from dcd.entities.thing import Thing
 from dcd.entities.property import PropertyType
 # The thing ID and access token
+
 load_dotenv()
-THING_ID = os.environ['THING_ID']
-THING_TOKEN = os.environ['THING_TOKEN']
-hub = False
-if (hub):
-   # Instantiate a thing with its credential
-   my_thing = Thing(thing_id=THING_ID, token=THING_TOKEN)
-   # We can read the details of our thing,
-   # i.e. retrieving its information from the hub
-   my_thing.read()
+
+# THING_ID = os.environ['THING_ID']
+# THING_TOKEN = os.environ['THING_TOKEN']
+# hub = False
+# if (hub):
+#    # Instantiate a thing with its credential
+#    my_thing = Thing(thing_id=THING_ID, token=THING_TOKEN)
+#    # We can read the details of our thing,
+#    # i.e. retrieving its information from the hub
+#    my_thing.read()
 
 # Start reading the serial port
 ser = serial.Serial(
@@ -44,14 +46,22 @@ def write_in_csv(values):
    file.close()
 # Read the next line from the serial port
 # and update the property values
+
+
 def serial_to_webpage():
-   # Read one line
-   line_bytes = ser.readline()
-   # If the line is not empty
-   if len(line_bytes) > 0:
-       try:
-           # Convert the bytes into string
-           line = line_bytes.decode('utf-8')
-           # Split the string using commas as separator, we get a list of strings
-           values = line.split(',')
-           print(values)
+    # Read one line
+    line_bytes = ser.readline()
+    # If the line is not empty
+    if len(line_bytes) > 0:
+        try:
+            # Convert the bytes into string
+            line = line_bytes.decode('utf-8')
+            # Split the string using commas as separator, we get a list of strings
+            values = line.split(',')
+            print(values)
+        except:
+            print("WTF")
+
+
+while True:
+    serial_to_webpage()
