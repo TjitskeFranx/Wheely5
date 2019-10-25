@@ -16,8 +16,8 @@ from dcd.entities.property import PropertyType
 
 # The thing ID and access token
 load_dotenv()
-THING_ID = os.environ['dcd:things:my-test-thing-27aa']
-THING_TOKEN = os.environ['eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NzA0MzU3MjAsImV4cCI6MTg4NjAxNTMyMCwiYXVkIjoiaHR0cHM6Ly9kd2QudHVkZWxmdC5ubDo0NDMvYXBpIn0.Y85EZHX-Td5a3ak7y0b1pOz5xCHegK47uOHP5uxl9ZW0Vft_X3UFUEj4J2hy6tf4F1_nbMXP-uOewR0R_Oj9rOjRHKgMqx_-mt9a74J_PHBTymRvhLDJc4Cm7CHD4vludkfpyUCcV_M-Bpfn4JWqGLN1KXt-CFDzTX7hLX9IZQu-thN7twun_BUZS4BxUAUSQbVTWxRsnl2qRXNnNOcSVmMJPBmdVxsLh24k6pNxSZ8KS_D6ERHbvh9R3_wKRtY7BSOpVeN04orHol198OEHVblT-bfJ_MSr8kL2I4z84U_dqnhuYdnEK1W7jhM_Wq77oAyVPJwtJ6hRixvLTg6gtC_yTF8d-kBkdcd21dTyIBBi-kjnoqBdE4cAofMsX2njmJ-8jCrw2JVFubpsSB7ilHSFpl6BP6YRThpHsrhmCfRYsp2Vl44i6UF-CRkiAE_lZXrx_u_h-rEexivemNUhB9uPP4_T0pkmqlUcAwiNqChEJ7L0T4V2-lXy-fXKTN1WJpQxavIbq8Ug9do6rUTh8p1WKe9SRVh9FzOBvXh94BLRLZQ4loyOh5akbvIR4FZ-m0LlL5yy-AAq8r1WowMQ0FA1YQPx5p2_8E9dSZ-m_fxPJd9O5B828TyjXZJWT8r0RTj2JAjoRp5dbvb0XD_r8doN_lTaUF3gQIVb1_-n_1Q']
+THING_ID = os.environ['THING_ID']
+THING_TOKEN = os.environ['THING_TOKEN']
 
 # Instantiate a thing with its credential
 my_thing = Thing(thing_id=THING_ID, token=THING_TOKEN)
