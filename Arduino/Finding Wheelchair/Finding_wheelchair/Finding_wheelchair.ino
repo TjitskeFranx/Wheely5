@@ -151,8 +151,7 @@ void loop()
       Serial.println(foundDevice + " :That's a perfectly acceptable text message");
       if (foundDevice.startsWith("+INQ:64B0:A6:A09F78"))
       {
-        Serial.println("ik ben nu hier");
-
+      
         hexString = foundDevice.substring(27);
         Serial.println(hexString);
 
@@ -169,8 +168,8 @@ void loop()
 
           decValue = (decValue * 16) + nextInt;
         }
-        
-        
+
+
         Serial.println(decValue);
 
         if (decValue >= 65480 && decValue <= 65510) {
