@@ -9,7 +9,7 @@ Tue {
 ___________________________________________________
 Fri {
   overshoot day
-  start linking Arduino to RB
+  start linking Arduino to RP
 }
 ___________________________________________________
 ___________________________________________________
@@ -18,16 +18,20 @@ Week 7 [28 & 1 Oct-Nov]
 Mon {
   design Tile and model to send to printer (or making it)
   Linking Arduino to RB 2
+
+}
+Tue{
+  Linking RB (python) to webapp
+  Hardware more or less done
 }
 ___________________________________________________
 Fri{
-  Linking RB (python) to webapp (CRITICAL)
   Making Tile and exhibition setup
 }
 ___________________________________________________
 
 ???{ overshoot day
-  Fix errors that we have of course
+  documentation
 }
 ___________________________________________________
 
