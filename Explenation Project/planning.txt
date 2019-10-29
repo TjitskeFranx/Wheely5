@@ -3,20 +3,20 @@ ___________________________________________________
 ___________________________________________________
 Week 1
 Fri {
-  -Beacon ---> Arduino (wheelchair recognition)
-  -Main visualisation score + freeze
+  -Beacon ---> Arduino (wheelchair recognition) X
+  -Main visualisation score + freeze X/V
 }
-___________________________________________________
+___________________________________________________     overshoot: freeze + wheelcair recognition
 Week 2
 Mon{
-  -Arduino - Rasberry Pi through cable connection
-  -Arduino 2 hardware done (and connected to Rasberry)
-  -Timer / Reset / Play
+  -Arduino - Rasberry Pi through cable connection X
+  -Arduino 2 hardware done (and connected to Rasberry) X
+  -Timer / Reset / Play X/V
 }
 ---------------------------------------------------
 Fri {
-  -Arduino --> Lora --> DCD
-  -Connect RP data to interface
+  -Arduino --> Lora --> DCD X
+  -Connect RP data to interface X
 }
 ___________________________________________________
 Week 3
@@ -25,7 +25,7 @@ Mon{
 }
 ---------------------------------------------------
 Fri{
-  -DCD to web application
+  -DCD to web application X
   -start 3D tile Design
   -Interface back to Arduino 2 commands
 }
@@ -53,4 +53,4 @@ ___________________________________________________
 Backup Plans
 ---------------------------------------------------
 - change prototype board to interface
-- 
+-
