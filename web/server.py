@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-
+from flask_socketio import SocketIO, emit
 app = Flask(__name__)
 
 sensors = ['sensor1', 'sensor2', 'sensor3'] #145.94.216.42
