@@ -1,6 +1,6 @@
 from guizero import App, Text, TextBox, PushButton
 app = App(title="gui_messing about")
-welcome_message = Text(app, text="", size=random(40), font="Comic Sans MS", color="blue")
+welcome_message = Text(app, text="you name please", size=40, font="Comic Sans MS", color="blue")
 
 my_name = TextBox(app)
 
