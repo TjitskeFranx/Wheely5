@@ -43,7 +43,7 @@ int buttonState = 0;         // variable for reading the pushbutton status
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(buttonPin, INPUT);
   Serial.println("Arduino is ready");
   Serial.println("Connect the HC-05 to an Android device to continue");  

@@ -34,8 +34,6 @@ const int buttonPin = 4;     // the number of the pushbutton pin
 // variables will change:
 int buttonState = 0;         // variable for reading the pushbutton status
 
-
-
 void setup()
 {
   // set the BTpin for input
@@ -46,7 +44,7 @@ void setup()
   pinMode(buttonPin, INPUT);
 
   // start serial communication with the serial monitor on the host computer
-  Serial.begin(9600);
+  Serial.begin(38400);
   Serial.println("Arduino is ready");
   Serial.println("Connect the HC-05 to an Android device to continue");
 
