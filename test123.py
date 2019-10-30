@@ -1,1 +1,1 @@
-print("hellp"*5)
+print("hello "*2)
