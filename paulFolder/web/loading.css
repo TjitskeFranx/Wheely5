@@ -1,0 +1,74 @@
+.time-element {
+  color: #e6fdff;
+  font-family: "Muli";
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0 auto 10% auto;
+  text-align: center;
+}
+
+.circle-time-container {
+  margin: 10% auto 2% auto;
+  width: 200px;
+  height: 200px;
+  /* width:10%; */
+  border-radius: 50%;
+  border: 8px solid #e6fdff;
+}
+
+.circle-time {
+  margin-top: 20%;
+  font-size: 100px;
+}
+
+.score-container {
+  width: 70%;
+  height: 70px;
+  /* i have know idea why i cant % this */
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0%  auto;
+  font-family: "Muli";
+  text-align: center;
+}
+
+#teamAbar {
+  border-radius: 15px 0 0 15px;
+  height: 100%;
+  float: left;
+  width: 10%;
+  background-color: #ffc136;
+}
+
+#neutralbar {
+  height: 100%;
+  width: 40%;
+  float: left;
+  background-color: #e6fdff;
+}
+
+#teamBbar {
+  border-radius: 0 15px 15px 0;
+  height: 100%;
+  float: left;
+  width: 50%;
+  background-color: #f4442f;
+}
+
+#teamTextContainer{
+display: block;
+}
+
+h1 {
+  font-family: "Muli";
+}
+
+#teamAtext{
+  float: left;
+  color: #ffc136;
+}
+
+#teamBtext{
+  float: right;
+  color: #f4442f;
+}

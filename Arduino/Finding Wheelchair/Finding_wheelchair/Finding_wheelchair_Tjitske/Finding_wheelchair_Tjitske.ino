@@ -151,7 +151,7 @@ void loop()
       Serial.println(foundDevice + " :That's a perfectly acceptable text message");
       if (foundDevice.startsWith("+INQ:64B0:A6:A09F78"))
       {
-        Serial.println(foundDevice);
+
         hexString = foundDevice.substring(27);
         Serial.println(hexString);
 
