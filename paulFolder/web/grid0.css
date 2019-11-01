@@ -1,0 +1,11 @@
+#main {
+    width:400px;
+    height:400px;
+    background-color:#DeFFee;
+    position:relative;
+}
+
+.clickedSquare {
+    background-color:#dd8888;
+    position:absolute;
+}
