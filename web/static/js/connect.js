@@ -29,7 +29,7 @@ socket.on('send', function(msg) { //reads/listens message
 
 function sendMessage(red, netural, blue) { //function you for sendng messages
   socket.emit('send', {
-    data: RedTiles
+    // data: RedTiles
   });
 }
 
