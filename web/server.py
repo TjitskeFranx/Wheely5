@@ -67,15 +67,16 @@ def home():
     return render_template('score.html')
 
 
-@socketio.on('json') #just a convention thingy about structures
+@socketio.on('json') #just a convention thingy about structures. channel that handles communication
 def handle_json(json):
     print('received json: ' + str(json)) #debug print tingu
     emit('json', json, broadcast=True) #to al lconnection channels
 
 @socketio.on('serial')
 def handle_distance(json):
-    print( float(json['serial']))
+    print( float(json['serial'])) #serial channel
 
 if __name__ == '__main__':
-    Thread(target=serial_to_property_values, args=())
+    thread = Thread(target=serial_to_property_values, args=())
+    thread.start()
     socketio.run(app, host='0.0.0.0', debug=True)  # this just runs the app
