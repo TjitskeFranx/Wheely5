@@ -13,7 +13,7 @@ using namespace ace_button;
 
 
 // Number of buttons and LEDs.
-const uint8_t NUM_TILES = 5;
+const uint8_t NUM_TILES = 3;
 int generalCooldown = 100;
 boolean WheelyInRange=true;
 //uint32_t ringColor=(0,0,0);
@@ -35,8 +35,8 @@ Info INFOS[NUM_TILES] = {
   {A0,generalCooldown, generalCooldown, 0, 0},  //id=0
   {A2, generalCooldown, generalCooldown, 0, 0}, //buttonpin, cooldown, timeAfterClick, teamTile, lightI
   {A4, generalCooldown, generalCooldown, 0, 0},
-  {A6, generalCooldown, generalCooldown, 0, 0},
-  {A8, generalCooldown, generalCooldown, 0, 0},  // id=4 (tile 5) REAL TILE = FINAL TILE
+//  {A6, generalCooldown, generalCooldown, 0, 0},
+//  {A8, generalCooldown, generalCooldown, 0, 0},  // id=4 (tile 5) REAL TILE = FINAL TILE
 };
 //WARNING: LED COLOURS ONLY UPDATED AT CHANGE
 
@@ -55,9 +55,13 @@ void setup() {
     buttons[id].init(INFOS[id].buttonPin, LOW, id); //dafug? 
     leds.setColorRGB(id, 0,0,0);
   }
+
+  void setDebounceDelay(uint16_t debounceDelay);
   ButtonConfig* buttonConfig = ButtonConfig::getSystemButtonConfig();
   buttonConfig->setEventHandler(handleEvent);
   buttonConfig->setFeature(ButtonConfig::kFeatureClick);
+    buttonConfig->setLongPressDelay(2000);
+  setDebounceDelay(10);
 
   //adafruit part
   #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
@@ -66,7 +70,8 @@ void setup() {
 //  strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
 //  strip.show();            // Turn OFF all pixels ASAP
 //  strip.setBrightness(50); 
-  
+
+
   Serial.println(F("setup(): ready"));
 }
 
