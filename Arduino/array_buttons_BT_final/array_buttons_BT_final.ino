@@ -36,10 +36,10 @@ SoftwareSerial BTserial(10, 11); // RX | TX
 #define PIXEL_COUNT 16 //for ledring
 #define RingId 4
 #define RestartId 5
-#define generalCooldown 10
+#define generalCooldown 50
+#define macAdressDevice = "64B0:A6:A09F78";
 
 //BT communication
-char macAdressDevice = "64B0:A6:A09F78";
 char BTchar = ' '; //data that starts out empty
 int signalStrenght;
 String foundDeviceString = String ();
@@ -48,6 +48,10 @@ int BTSearchTime = 10000;
 int BTCooldown = 0;
 int BTTime =0;
 bool BTCheck = false;
+
+//other
+int redScore=3; //just initial: should be random to be honest
+int blueScore=2;
 
 
 //--------FUCTIONS-------------
@@ -122,6 +126,7 @@ void setup() {
   ButtonConfig* buttonConfig = ButtonConfig::getSystemButtonConfig();
   buttonConfig->setEventHandler(handleEvent);
   buttonConfig->setFeature(ButtonConfig::kFeatureClick);
+//  buttonConfig->setDebounceDelay(20);
 
   //adafruit part
 #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
@@ -150,11 +155,14 @@ void loop() {
     CheckBTTime();
   }
   else{
+    
     for (int id = 0; id < NUM_TILES; id++) {
       buttons[id].check();
       checkCooldown(id);
-      displayLight(id, INFOS[id].tileTeam, INFOS[id].lightI, INFOS[id].wheelyPower);
-      updateRing(INFOS[RingId].tileTeam, INFOS[RingId].lightI, INFOS[RingId].wheelyPower);
+      if(millis()%2==0){
+        displayLight(id, INFOS[id].tileTeam, INFOS[id].lightI, INFOS[id].wheelyPower);
+        updateRing(INFOS[RingId].tileTeam, INFOS[RingId].lightI, INFOS[RingId].wheelyPower);
+      }
 
     }
   }
@@ -181,25 +189,31 @@ void handleEvent(AceButton* button, uint8_t eventType, uint8_t buttonState) { //
 
     if (INFOS[id].timeAfterClick == INFOS[id].cooldown) { //if PASSED
       INFOS[id].timeAfterClick = 0; //reset cooldown
-      Serial.println("click from ");
-      Serial.println(id);
+      Serial.println("clicked");
 
       //WHERE THE MAGIC HAPPENS
       switch (INFOS[id].tileTeam) {
         case 1: //red
           INFOS[id].tileTeam = 2; //red>blue
+          blueScore++;
+          redScore--;
           INFOS[id].cooldown = generalCooldown;
           break;
         case 2: //blue
           INFOS[id].tileTeam = 1; //blue >red
           INFOS[id].cooldown = generalCooldown;
+          blueScore--;
+          redScore++;
           break;
         case 0: //neutral
           INFOS[id].tileTeam = 2; //neutral> ?(blue)
           INFOS[id].cooldown = 1;
+          blueScore++;
+          communicateScore();
           break;
       } //switches
-
+      communicateScore();
+      
       if (id == RestartId) {
         restartGame(); //for TESTING
       }
@@ -239,7 +253,7 @@ void displayLight(int id, int team, float lightI, boolean WP) {
       leds.setColorRGB(id,  lightI, (WP *(lightI/8)), 0); //if WheelyPower = on, make light slightly different
       break;
     case 2: //blue
-      leds.setColorRGB(id,  0, (WP *(lightI/8)), lightI);
+      leds.setColorRGB(id,  0, (WP *(lightI/4)), lightI);
       break;
     case 0: //neutral
       leds.setColorRGB(id, 0, 0, 0);
@@ -251,11 +265,11 @@ void updateRing(int team, uint32_t lightI, boolean WP) { //CALLED 16 TIMES A STE
   for (int i = 0; i < PIXEL_COUNT; i++) { // For each pixel in strip...
     switch (team) {
       case 1: //red
-        strip.setPixelColor(i, strip.Color(lightI,   (WP *(lightI/8)),   0)); //no worky
+        strip.setPixelColor(i, strip.Color(lightI,   (WP *(lightI/8)),   0)); 
         //           Serial.println("I should be red right now");
         break;
       case 2: //blue
-        strip.setPixelColor(i, strip.Color(0,   (WP *(lightI/8)),   lightI)); //worky
+        strip.setPixelColor(i, strip.Color(0,   (WP *(lightI/4)),   lightI)); 
         break;
       case 0: //neutral
         strip.setPixelColor(i, (0, 0, 0));
@@ -282,6 +296,10 @@ float calculateBrightness(int isteps, int icooldown, boolean WP) {
   return b;
 }
 
+void communicateScore(){
+  Serial.println("redscore " + String(redScore));
+  Serial.println("bluescore " + String(blueScore));
+}
 
 //ALL BT RELATED FUNCTIONS
 //------------------------------------------------------------------------
@@ -393,7 +411,7 @@ void setupBTSerial() {
   BTserial.println("AT+ROLE=1");
   Serial.println("73%---------");
   delay(100);
-  BTserial.println("AT+INQM=1,12,5");
+  BTserial.println("AT+INQM=1,5,5");
   Serial.println("95%-------------");
   delay(100);
   Serial.println("100%--------------");
