@@ -4,12 +4,27 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/score.css') }}">
   <script src="{{ url_for('static', filename='js/score.js') }}" language="JavaScript"></script>
   <script src="{{ url_for('static', filename='js/resetAll.js') }}" language="JavaScript"></script>
-
-
   <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
                integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I="
                crossorigin="anonymous"></script>
-               <!-- dafug is this -->
+               <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
+                              integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I="
+                              crossorigin="anonymous"></script>
+                  <script type="text/javascript" charset="utf-8">
+                    var socket = io();
+
+                    socket.on('json', function(msg, cb) {
+
+                    });
+                    socket.on('serial', function(json_str) {
+                      const json = JSON.parse(dist_str);
+                      console.log(json);
+                      console.log(json.data);
+                      if (json.data !== undefined) {
+                      //  document.getElementById("myBar").= json.distance;
+                      }
+                    });
+
 
   <!-- <script src="{{ url_for('static', filename='js/connect.js') }}" language="JavaScript"></script> -->
 
@@ -24,10 +39,6 @@
       </div>
     </div>
     <div id='timeUnderscript'>Time untill next game</div>
-<<<<<<< HEAD
-=======
-    <div id='restart' onclick="sendMessage('click!')">restart</div>
->>>>>>> 029df0780c489cca2db419d25997a07f8327f11e
   </div>
 
 <div class="score-container">

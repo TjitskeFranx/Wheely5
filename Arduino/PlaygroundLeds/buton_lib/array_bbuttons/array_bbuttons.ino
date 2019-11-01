@@ -61,7 +61,7 @@ void setup() {
   buttonConfig->setEventHandler(handleEvent);
   buttonConfig->setFeature(ButtonConfig::kFeatureClick);
     buttonConfig->setLongPressDelay(2000);
-  setDebounceDelay(10);
+  buttonConfig->setDebounceDelay(10);
 
   //adafruit part
   #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
