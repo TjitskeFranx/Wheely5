@@ -1,0 +1,105 @@
+.time-element {
+  color: #e6fdff;
+  font-family: "Muli";
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 auto 10% auto;
+  text-align: center;
+}
+
+.circle-time-container {
+  margin: 8% auto 1% auto;
+  width: 200px;
+  height: 200px;
+  /* width:10%; */
+  border-radius: 50%;
+  border: 10px solid #e6fdff;
+}
+
+.circle-time {
+  margin-top: 25%;
+  font-size: 75px;
+}
+#restart{
+  padding: 0px 0px 2px 0px;
+  margin: 1% 40% 0% 40%;
+  /* width: 100px; */
+  border: 2px solid;
+  border-radius: 25px;
+  cursor: pointer;
+}
+#restart:hover{
+  background-color: #525252;
+}
+#restart:active{
+  background-color: #e6fdff;
+  color: #121212;
+}
+
+.score-container {
+  width: 70%;
+  height: 70px;
+  /* i have know idea why i cant % this */
+  /* font-size: 15px; */
+  font-weight: bold;
+  margin: 0%  auto;
+  font-family: "Muli";
+  text-align: center;
+  border-radius: 15px 15px 15px 15px;
+}
+
+#restart{
+
+}
+
+#teamAbarFrozen {
+
+  height: 100%;
+  float: left;
+
+  background-color: #5eafff;
+  opacity: 0.5;
+}
+
+#teamAbar {
+
+  height: 100%;
+  float: left;
+
+  background-color: #5eafff;
+}
+
+
+#teamBbar {
+
+  height: 100%;
+  float: left;
+
+  background-color: #f4442f;
+}
+
+#teamBbarFrozen {
+
+  height: 100%;
+  float: left;
+  background-color: #f4442f;
+  opacity: 0.5;
+}
+
+#teamTextContainer{
+display: block;
+}
+
+h1 {
+  font-family: "Muli";
+}
+
+#teamAtext{
+  float: left;
+  color: #5eafff;
+}
+
+#teamBtext{
+  float: right;
+  color: #f4442f;
+}
