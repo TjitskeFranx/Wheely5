@@ -42,4 +42,4 @@ def handle_distance(json):
 if __name__ == '__main__':
     #thread = Thread(target=serial_to_property_values, args=())
     #thread.start()
-    socketio.run(app, host='0.0.0.0', debug=True)  # this just runs the app
+    socketio.run(app, host='145.94.181.160', debug=True)  # this just runs the app
