@@ -411,7 +411,7 @@ void setupBTSerial() {
   BTserial.println("AT+ROLE=1");
   Serial.println("73%---------");
   delay(100);
-  BTserial.println("AT+INQM=1,5,5");
+  BTserial.println("AT+INQM=1,10,5");
   Serial.println("95%-------------");
   delay(100);
   Serial.println("100%--------------");
