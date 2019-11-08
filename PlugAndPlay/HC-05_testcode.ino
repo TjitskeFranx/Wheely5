@@ -21,8 +21,7 @@
 #include <SoftwareSerial.h>
 
 SoftwareSerial BTserial(18, 19); // RX | TX
-
-#define macAdressDevice = "64B0:A6:A09F78"; //enter MAC address of your used beacon here! Should always be in the form ABCD:EF:123456
+char macAdressDevice = "64B0:A6:A09F78"; //enter MAC address of your used beacon here!
 
 //BT communication
 char BTchar = ' '; //data that starts out empty
