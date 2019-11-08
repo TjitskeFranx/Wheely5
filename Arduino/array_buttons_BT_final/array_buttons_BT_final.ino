@@ -89,15 +89,14 @@ struct Info {
 };
 
 Info INFOS[NUM_TILES] = {
-  {A0, generalCooldown, generalCooldown, 1, 255, false}, //id=0
-  {A2, generalCooldown, generalCooldown, 1, 255, false}, //buttonpin, cooldown, timeAfterClick, teamTile, lightI, Wheelypower
-  {A4, generalCooldown, generalCooldown, 2, 255, false},
+  {A2, generalCooldown, generalCooldown, 1, 255, false}, //id=0
+  {A4, generalCooldown, generalCooldown, 1, 255, false}, //buttonpin, cooldown, timeAfterClick, teamTile, lightI, Wheelypower
   {A6, generalCooldown, generalCooldown, 2, 255, false},
-  {A8, generalCooldown, generalCooldown, 1, 255, false}, //RingId id=4, only one with wheely power
-  {A10, 10, 10, 0, 0, false},                          //RestartID id=5
-};
+  {A8, generalCooldown, generalCooldown, 2, 255, false},
+  {A0, generalCooldown, generalCooldown, 1, 255, false}, //LedRing, ''real-size Tile'
+  {A12, 10, 10, 0, 0, false},                            //Restart button, no real tile
 
-AceButton buttons[NUM_TILES];
+AceButton buttons[NUM_TILES]; //create the button objects, called 'buttons'
 
 //_______________________________________________________________________________________
 
@@ -122,43 +121,41 @@ void setup() {
     buttons[id].init(INFOS[id].buttonPin, LOW, id); //dafug?
     leds.setColorRGB(id, 0, 0, 0);
   }
-
-  ButtonConfig* buttonConfig = ButtonConfig::getSystemButtonConfig();
-  buttonConfig->setEventHandler(handleEvent);
-  buttonConfig->setFeature(ButtonConfig::kFeatureClick);
-//  buttonConfig->setDebounceDelay(20);
-
-  //adafruit part
-#if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
-  clock_prescale_set(clock_div_1);
-#endif
-  strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
-  strip.show();            // Turn OFF all pixels ASAP
-  strip.setBrightness(100);
-
-  updateRing(1, 255, true);
-  delay(500);
-
-  Serial.println("setup(): ready");
+  
+    //initiate the event handler so we can call event ''button clicked'' later
+    ButtonConfig* buttonConfig = ButtonConfig::getSystemButtonConfig();
+    buttonConfig->setEventHandler(handleEvent);
+    buttonConfig->setFeature(ButtonConfig::kFeatureClick);
+  
+  
+    //initialize the LedRing
+  #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
+    clock_prescale_set(clock_div_1);
+  #endif
+    strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
+    strip.show();            // Turn OFF all pixels ASAP
+    strip.setBrightness(100); 
+    Serial.println("setup(): ready");
+  }
 }
 
 //------------------------------------------------------------------------
 
 
 void loop() {
-  // Should be called every 4-5ms or faster, for the default debouncing time
-  // of ~20ms.//NO DELAYS
-//  btDone = false;
 
-  if(BTCheck){
+  if(BTCheck){    //checks EITHER BT or updates Leds. system cannot do both at same time.
     checkBT();
     CheckBTTime();
   }
   else{
     
     for (int id = 0; id < NUM_TILES; id++) {
+      //functions that are checked every step
       buttons[id].check();
       checkCooldown(id);
+      
+      //heavy functions that are checked every 2 steps because otherwhise the system gets to slow
       if(millis()%2==0){
         displayLight(id, INFOS[id].tileTeam, INFOS[id].lightI, INFOS[id].wheelyPower);
         updateRing(INFOS[RingId].tileTeam, INFOS[RingId].lightI, INFOS[RingId].wheelyPower);
@@ -180,74 +177,75 @@ void loop() {
 //------------------------------------------------------------------------
 //------------------------------------------------------------------------
 
-void handleEvent(AceButton* button, uint8_t eventType, uint8_t buttonState) { //only called when happens
-  // The event handler for the button.
+void handleEvent(AceButton* button, uint8_t eventType, uint8_t buttonState) { 
 
-  uint8_t id = button->getId();
+  uint8_t id = button->getId(); //which button is pressed?
 
-  if (eventType == AceButton::kEventPressed) { //if PRESSED
+  if (eventType == AceButton::kEventPressed) { //if button PRESSED
 
-    if (INFOS[id].timeAfterClick == INFOS[id].cooldown) { //if PASSED
-      INFOS[id].timeAfterClick = 0; //reset cooldown
-      Serial.println("clicked");
+    if (INFOS[id].timeAfterClick == INFOS[id].cooldown) { //if button not blocked
+      INFOS[id].timeAfterClick = 0; //reset cooldown timer
 
-      //WHERE THE MAGIC HAPPENS
+
+      //what happens when?
       switch (INFOS[id].tileTeam) {
-        case 1: //red
-          INFOS[id].tileTeam = 2; //red>blue
+        case 1: //red team
+          INFOS[id].tileTeam = 2; //goes from red to blue
           blueScore++;
           redScore--;
-          INFOS[id].cooldown = generalCooldown;
+          INFOS[id].cooldown = generalCooldown; //reset cooldown again
           break;
         case 2: //blue
-          INFOS[id].tileTeam = 1; //blue >red
-          INFOS[id].cooldown = generalCooldown;
+          INFOS[id].tileTeam = 1; //goes from blue to red
           blueScore--;
           redScore++;
+          INFOS[id].cooldown = generalCooldown;
           break;
         case 0: //neutral
-          INFOS[id].tileTeam = 2; //neutral> ?(blue)
-          INFOS[id].cooldown = 1;
+          INFOS[id].tileTeam = 2; //goes from neutral/off to blue.. 
+          INFOS[id].cooldown = 1; //...but allows for clicking again straight away to make it red again
           blueScore++;
           communicateScore();
           break;
       } //switches
       communicateScore();
       
-      if (id == RestartId) {
-        restartGame(); //for TESTING
+      if (id == RestartId) { //restart when restart button is pressed
+        restartGame(); 
       }
-      else if(id==RingId){
-        BTserial.println("AT+INQ");
+      else if(id==RingId){  //when the button of the real-size tile is pressed
+        BTserial.println("AT+INQ"); //send search protocol
         Serial.println("searching...");
-        BTCooldown=5000; //(5 sec)
+        BTCooldown=5000; //searches for 5 seconds
         BTCheck=true;
       }
       
-    } //end if passed
+    } 
   }
 }
 
 void checkCooldown(int id) { //handles cooldown system
   if (INFOS[id].timeAfterClick < INFOS[id].cooldown) {
     INFOS[id].timeAfterClick++;
+    
+    //the brightness of the leds is a function of how long the buttons have been blocked
     INFOS[id].lightI = calculateBrightness(INFOS[id].timeAfterClick, INFOS[id].cooldown, INFOS[id].wheelyPower);
 
     //if ready
-    if (INFOS[id].timeAfterClick == INFOS[id].cooldown) {
+    if (INFOS[id].timeAfterClick == INFOS[id].cooldown) { //when the timer runs out> unblock the button
       Serial.println("READY button:");
       Serial.print(id);
       Serial.println("");
-      INFOS[id].lightI = 255;
+      INFOS[id].lightI = 255; //...and make the leds brightly lit again.
       if (id == RingId) {
         INFOS[RingId].wheelyPower = false;
-        INFOS[RingId].cooldown = INFOS[RingId].timeAfterClick = generalCooldown;
+        INFOS[RingId].cooldown = INFOS[RingId].timeAfterClick = generalCooldown; //reset 'frozen tile' also.
       }
     }
   }
 }
 
-void displayLight(int id, int team, float lightI, boolean WP) {
+void displayLight(int id, int team, float lightI, boolean WP) {  //WP stands for wheely power
   switch (team) { //for all model LED's
     case 1: //red
       leds.setColorRGB(id,  lightI, (WP *(lightI/8)), 0); //if WheelyPower = on, make light slightly different
@@ -261,12 +259,11 @@ void displayLight(int id, int team, float lightI, boolean WP) {
   }
 }
 
-void updateRing(int team, uint32_t lightI, boolean WP) { //CALLED 16 TIMES A STEP
+void updateRing(int team, uint32_t lightI, boolean WP) { 
   for (int i = 0; i < PIXEL_COUNT; i++) { // For each pixel in strip...
     switch (team) {
       case 1: //red
-        strip.setPixelColor(i, strip.Color(lightI,   (WP *(lightI/8)),   0)); 
-        //           Serial.println("I should be red right now");
+        strip.setPixelColor(i, strip.Color(lightI,   (WP *(lightI/8)), 0)); 
         break;
       case 2: //blue
         strip.setPixelColor(i, strip.Color(0,   (WP *(lightI/4)),   lightI)); 
@@ -275,24 +272,24 @@ void updateRing(int team, uint32_t lightI, boolean WP) { //CALLED 16 TIMES A STE
         strip.setPixelColor(i, (0, 0, 0));
         break;
     }
-    strip.show();                          //  Update strip to match
+    strip.show();  //strip needs to be updated in order to show changes
   }
 }
 
 void restartGame() {
-  for (uint8_t id = 0; id < NUM_TILES; id++) {
+  for (uint8_t id = 0; id < NUM_TILES; id++) { //in this case, every team or power is reset to default
     INFOS[id].tileTeam = 0;
     INFOS[id].cooldown = generalCooldown;
     INFOS[id].timeAfterClick = generalCooldown;
     INFOS[id].wheelyPower = false;
-    wheelyInRange != wheelyInRange;
   }
   Serial.println("Full Game restart");
 }
 
 float calculateBrightness(int isteps, int icooldown, boolean WP) { 
-  int a = isteps % (5 + WP * 5); //if wheelyPower then make it blink 2 slower
-  int b = map(a, 0, 20, 0, 255);
+  //converts TimeAfterClick to a Brichtness function
+  int a = isteps % (5 + WP * 5); //make it blink slower when Tile is Frozen (if WP=true)
+  int b = map(a, 0, 20, 0, 255); //brightness should be between 0-255
   return b;
 }
 
@@ -411,7 +408,7 @@ void setupBTSerial() {
   BTserial.println("AT+ROLE=1");
   Serial.println("73%---------");
   delay(100);
-  BTserial.println("AT+INQM=1,10,5");
+  BTserial.println("AT+INQM=1,5,5");
   Serial.println("95%-------------");
   delay(100);
   Serial.println("100%--------------");
