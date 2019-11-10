@@ -10,13 +10,8 @@ from dotenv import load_dotenv
 import os
 import serial
 
-
-
 # The thing ID and access token
 load_dotenv()
-
-
-
 
 # Start reading the serial port
 ser = serial.Serial(

@@ -1,8 +1,8 @@
 //ORDER MATTERS
-var TilesAmount = 5;
-var BlueTiles = 2,
-  RedTiles = 3;
-  BlueTilesFrozen = 0;
+var TilesAmount = 5;  //amount of tiles: in this case 5
+var BlueTiles = 2, //In this example, we will start mid-game ...
+  RedTiles = 3;    //...and this allready divide points.
+  BlueTilesFrozen = 0; //these are needed for the 'frozen power ups later'
   RedTilesFrozen = 0;
   FrozenStateBlue = 0;
   FrozenStateRed = 0;
@@ -11,22 +11,21 @@ var Tiles = [TilesAmount]; //create amount of tiles
 
 setInterval(update, 1000);
 
-function update() { //THIS PART CAN BE TWEAKED BUT PLEASE DONT
-  // RedTiles = stealTileOrNot(RedTiles, NeutralTiles);
-  // BlueTiles = stealTileOrNot(BlueTiles, NeutralTiles);
-  stealRedAndBlue();
-  frozenTiles();
+function update() {
+  stealRedAndBlue(); //decide if red and blue steal from each other this update
+  frozenTiles();    //decide if there are any tiles frozen this update
   redraw();
+  //communicate scoe
   console.log("Red:" + (RedTiles + RedTilesFrozen) + "(" + RedTilesFrozen + ")");
   console.log("Blue:" + (BlueTiles + BlueTilesFrozen) + "(" + BlueTilesFrozen + ")");
 
-  if (FrozenStateBlue > (-1)){
+  if (FrozenStateBlue > (-1)){ //count down on all frozen states
     FrozenStateBlue--;
   }
   if (FrozenStateRed > (-1)){
     FrozenStateRed--;
   }
-  
+
   neutralizeFrozenTiles();
   redraw();
   console.log("Red:" + RedTiles + "(" + RedTilesFrozen + ")");
@@ -34,8 +33,7 @@ function update() { //THIS PART CAN BE TWEAKED BUT PLEASE DONT
 }
 
 function redraw(){ //has some rare errors
-
-//when no special case
+//first scale the number of tiles to %
   var percentageB = RedTiles*20;
   var percentageA = BlueTiles*20;
   var percentageBFrozen = RedTilesFrozen*20;
@@ -45,15 +43,6 @@ function redraw(){ //has some rare errors
   document.getElementById("teamAbar").style.width=String(percentageA+'%');
   document.getElementById("teamBbar").style.width=String(percentageB+'%');
   document.getElementById("teamBbarFrozen").style.width=String(percentageBFrozen+'%');
-
-  // if (RedTilesFrozen > 0){
-  //   document.getElementById("teamAbar").style.borderRadius=String('0 0 0 0');
-  // }
-  //
-  // if (BlueTilesFrozen > 0){
-  //   document.getElementById("teamBbar").style.borderRadius=String('0 0 0 0');
-  // }
-
 }
 
 function stealRedAndBlue() { //this should be a lot easier
@@ -74,8 +63,8 @@ function stealRedAndBlue() { //this should be a lot easier
 
 function frozenTiles(){
   if (BlueTiles > 0){
-      let chanceStealBlue = Math.round(map_range(RedTiles, 0, TilesAmount, 30, 2));
-      FrozenfromBlue = Math.round(random(1, chanceStealBlue));
+      let chanceToFreeze= Math.round(map_range(RedTiles, 0, TilesAmount, 30, 2));
+      FrozenfromBlue = Math.round(random(1, chanceToFreeze));
       if (FrozenfromBlue == 1 ) {
         BlueTilesFrozen++;
         BlueTiles--;
@@ -84,8 +73,8 @@ function frozenTiles(){
       }
   }
   if (RedTiles > 0){
-    let chanceStealRed = Math.round(map_range(BlueTiles, 0, TilesAmount, 30, 2));
-    FrozenfromRed = Math.round(random(1, chanceStealRed));
+    let chanceToFreeze = Math.round(map_range(BlueTiles, 0, TilesAmount, 30, 2));
+    FrozenfromRed = Math.round(random(1, chanceToFreeze));
     if (FrozenfromRed == 1 ) {
       RedTilesFrozen++;
       RedTiles--;
@@ -101,7 +90,6 @@ function neutralizeFrozenTiles(){
         BlueTiles++;
         console.log("Im not frozen anymore");
   }
-
   if (FrozenStateRed == 0){
       RedTilesFrozen--;
       RedTiles++;
@@ -117,7 +105,6 @@ function wait(ms){
      end = new Date().getTime();
   }
 }
-
 
 function random(lowest, highest) {
   var adjustedHigh = (highest - lowest) + 1;
